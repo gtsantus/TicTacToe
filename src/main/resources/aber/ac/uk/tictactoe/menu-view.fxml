@@ -24,5 +24,32 @@
             <Font size="54.0" />
          </font>
       </Label>
+   <Button fx:id="btnRandom2" layoutX="573.0" layoutY="235.0" mnemonicParsing="false" onAction="#onRandom2Click" prefHeight="30.0" prefWidth="90.0" text="Random" visible="false" />
+   <Button fx:id="btnTree2" layoutX="573.0" layoutY="277.0" mnemonicParsing="false" onAction="#onTree2Click" prefHeight="30.0" prefWidth="90.0" text="Tree" visible="false" />
+   <Button fx:id="btnReinforce2" layoutX="573.0" layoutY="320.0" mnemonicParsing="false" onAction="#onReinforce2Click" prefHeight="30.0" prefWidth="90.0" text="Reinforce" visible="false" />
+   <Label fx:id="lblPickABot2" alignment="CENTER" layoutX="573.0" layoutY="162.0" prefHeight="30.0" prefWidth="90.0" text="Pick a Bot" visible="false">
+      <font>
+         <Font size="17.0" />
+      </font>
+   </Label>
+   <Label fx:id="lblCurrentBot2" alignment="CENTER" layoutX="554.0" layoutY="192.0" prefHeight="30.0" prefWidth="129.0" visible="false">
+      <font>
+         <Font size="17.0" />
+      </font>
+   </Label>
+   <Button fx:id="btnRandom1" layoutX="57.0" layoutY="235.0" mnemonicParsing="false" onAction="#onRandom1Click" prefHeight="30.0" prefWidth="90.0" text="Random" visible="false" />
+   <Button fx:id="btnTree1" layoutX="57.0" layoutY="277.0" mnemonicParsing="false" onAction="#onTree1Click" prefHeight="30.0" prefWidth="90.0" text="Tree" visible="false" />
+   <Button fx:id="btnReinforce1" layoutX="57.0" layoutY="320.0" mnemonicParsing="false" onAction="#onReinforce1Click" prefHeight="30.0" prefWidth="90.0" text="Reinforce" visible="false" />
+   <Label fx:id="lblPickABot1" alignment="CENTER" layoutX="57.0" layoutY="165.0" prefHeight="30.0" prefWidth="90.0" text="Pick a Bot" visible="false">
+      <font>
+         <Font size="17.0" />
+      </font>
+   </Label>
+   <Button fx:id="btnStart" layoutX="306.0" layoutY="418.0" mnemonicParsing="false" onAction="#onStartButtonClick" prefHeight="30.0" prefWidth="90.0" text="Start" visible="false" />
+   <Label fx:id="lblCurrentBot1" alignment="CENTER" layoutX="38.0" layoutY="192.0" prefHeight="30.0" prefWidth="129.0" visible="false">
+      <font>
+         <Font size="17.0" />
+      </font>
+   </Label>
    
 </Pane>
