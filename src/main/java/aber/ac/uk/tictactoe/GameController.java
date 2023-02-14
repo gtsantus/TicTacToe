@@ -57,9 +57,84 @@ public class GameController {
             gameStart = true;
         }else if(gameMode == 1){
             gameStart = true;
+            if(turn == TURN.O){
+                    bot1.setGameState(gameState);
+                    int nextMove = bot1.getNextMove();
+                    for(int i =1; i < 11; i++){
+                        if(i == nextMove && nextMove == 1){
+                            onBox1Clicked();
+                        } else if (i == nextMove && nextMove == 2) {
+                            onBox2Clicked();
+                        } else if (i == nextMove && nextMove == 3) {
+                            onBox3Clicked();
+                        }else if (i == nextMove && nextMove == 4) {
+                            onBox4Clicked();
+                        }else if (i == nextMove && nextMove == 5) {
+                            onBox5Clicked();
+                        }else if (i == nextMove && nextMove == 6) {
+                            onBox6Clicked();
+                        }else if (i == nextMove && nextMove == 7) {
+                            onBox7Clicked();
+                        }else if (i == nextMove && nextMove == 8) {
+                            onBox8Clicked();
+                        }else if (i == nextMove && nextMove == 9) {
+                            onBox9Clicked();
+                        }
+                    }
+            }
         }
-        else{
-
+        else if(gameMode == 2){
+            gameStart = true;
+            if(turn == TURN.O){
+                bot1.setGameState(gameState);
+                int nextMove = bot1.getNextMove();
+                for(int i =1; i < 11; i++){
+                    if(i == nextMove && nextMove == 1){
+                        onBox1Clicked();
+                    } else if (i == nextMove && nextMove == 2) {
+                        onBox2Clicked();
+                    } else if (i == nextMove && nextMove == 3) {
+                        onBox3Clicked();
+                    }else if (i == nextMove && nextMove == 4) {
+                        onBox4Clicked();
+                    }else if (i == nextMove && nextMove == 5) {
+                        onBox5Clicked();
+                    }else if (i == nextMove && nextMove == 6) {
+                        onBox6Clicked();
+                    }else if (i == nextMove && nextMove == 7) {
+                        onBox7Clicked();
+                    }else if (i == nextMove && nextMove == 8) {
+                        onBox8Clicked();
+                    }else if (i == nextMove && nextMove == 9) {
+                        onBox9Clicked();
+                    }
+                }
+            }
+            if(turn == TURN.X){
+                bot2.setGameState(gameState);
+                int nextMove = bot2.getNextMove();
+                for(int i =1; i < 10; i++){
+                    if(i == nextMove && nextMove == 1){
+                        onBox1Clicked();
+                    } else if (i == nextMove && nextMove == 2) {
+                        onBox2Clicked();
+                    } else if (i == nextMove && nextMove == 3) {
+                        onBox3Clicked();
+                    }else if (i == nextMove && nextMove == 4) {
+                        onBox4Clicked();
+                    }else if (i == nextMove && nextMove == 5) {
+                        onBox5Clicked();
+                    }else if (i == nextMove && nextMove == 6) {
+                        onBox6Clicked();
+                    }else if (i == nextMove && nextMove == 7) {
+                        onBox7Clicked();
+                    }else if (i == nextMove && nextMove == 8) {
+                        onBox8Clicked();
+                    }else if (i == nextMove) {
+                        onBox9Clicked();
+                    }
+                }
+            }
         }
 
     }
@@ -75,12 +150,16 @@ public class GameController {
                     lblNo2.getText().equals(lblNo5.getText()) && lblNo5.getText().equals(lblNo8.getText()) && !lblNo2.getText().equals("") || lblNo3.getText().equals(lblNo6.getText()) && lblNo6.getText().equals(lblNo9.getText()) && !lblNo3.getText().equals("") ||
                     lblNo1.getText().equals(lblNo5.getText()) && lblNo5.getText().equals(lblNo9.getText()) && !lblNo1.getText().equals("") || lblNo3.getText().equals(lblNo5.getText()) && lblNo5.getText().equals(lblNo7.getText()) && !lblNo3.getText().equals("")) {
                         lblTurn.setText(turn.toString() + " wins!");
+                        gameStart = false;
+            }else if (gameState[0] != 0 && gameState[1] != 0 && gameState[2] != 0 && gameState[3] != 0 && gameState[4] != 0 && gameState[5] != 0 && gameState[6] != 0 && gameState[7] != 0 && gameState[8] != 0){
+                lblTurn.setText("Draw!");
+                gameStart = false;
             }
             else{
                 if(turn == TURN.X){
                     lblTurn.setText("Turn: O");
                     turn = TURN.O;
-                    if(gameMode == 1){
+                    if(gameMode == 1 || gameMode == 2){
                         bot1.setGameState(gameState);
                         int nextMove = bot1.getNextMove();
                         for(int i =1; i < 11; i++){
@@ -108,6 +187,31 @@ public class GameController {
                 }else{
                     lblTurn.setText("Turn: X");
                     turn = TURN.X;
+                    if(gameMode == 2){
+                        bot2.setGameState(gameState);
+                        int nextMove = bot2.getNextMove();
+                        for(int i =1; i < 11; i++){
+                            if(i == nextMove && nextMove == 1){
+                                onBox1Clicked();
+                            } else if (i == nextMove && nextMove == 2) {
+                                onBox2Clicked();
+                            } else if (i == nextMove && nextMove == 3) {
+                                onBox3Clicked();
+                            }else if (i == nextMove && nextMove == 4) {
+                                onBox4Clicked();
+                            }else if (i == nextMove && nextMove == 5) {
+                                onBox5Clicked();
+                            }else if (i == nextMove && nextMove == 6) {
+                                onBox6Clicked();
+                            }else if (i == nextMove && nextMove == 7) {
+                                onBox7Clicked();
+                            }else if (i == nextMove && nextMove == 8) {
+                                onBox8Clicked();
+                            }else if (i == nextMove && nextMove == 9) {
+                                onBox9Clicked();
+                            }
+                        }
+                    }
                 }
             }
     }
@@ -115,7 +219,7 @@ public class GameController {
     public void onBox1Clicked(){
         if(gameStart && lblNo1.getText().equals("")){
             lblNo1.setText(turn.toString());
-            gameState[1] = 1;
+            gameState[0] = 1;
             checkIfWon();
         }
     }
@@ -123,7 +227,7 @@ public class GameController {
     public void onBox2Clicked(){
         if(gameStart && lblNo2.getText().equals("")){
             lblNo2.setText(turn.toString());
-            gameState[2] = 1;
+            gameState[1] = 1;
             checkIfWon();
         }
     }
@@ -131,7 +235,7 @@ public class GameController {
     public void onBox3Clicked(){
         if(gameStart && lblNo3.getText().equals("")){
             lblNo3.setText(turn.toString());
-            gameState[3] = 1;
+            gameState[2] = 1;
             checkIfWon();
         }
     }
@@ -139,7 +243,7 @@ public class GameController {
     public void onBox4Clicked(){
         if(gameStart && lblNo4.getText().equals("")){
             lblNo4.setText(turn.toString());
-            gameState[4] = 1;
+            gameState[3] = 1;
             checkIfWon();
         }
     }
@@ -147,7 +251,7 @@ public class GameController {
     public void onBox5Clicked(){
         if(gameStart && lblNo5.getText().equals("")){
             lblNo5.setText(turn.toString());
-            gameState[5] = 1;
+            gameState[4] = 1;
             checkIfWon();
         }
     }
@@ -155,7 +259,7 @@ public class GameController {
     public void onBox6Clicked(){
         if(gameStart && lblNo6.getText().equals("")){
             lblNo6.setText(turn.toString());
-            gameState[6] = 1;
+            gameState[5] = 1;
             checkIfWon();
         }
     }
@@ -163,7 +267,7 @@ public class GameController {
     public void onBox7Clicked(){
         if(gameStart && lblNo7.getText().equals("")){
             lblNo7.setText(turn.toString());
-            gameState[7] = 1;
+            gameState[6] = 1;
             checkIfWon();
         }
     }
@@ -171,7 +275,7 @@ public class GameController {
     public void onBox8Clicked(){
         if(gameStart && lblNo8.getText().equals("")){
             lblNo8.setText(turn.toString());
-            gameState[8] = 1;
+            gameState[7] = 1;
             checkIfWon();
         }
     }
@@ -179,7 +283,7 @@ public class GameController {
     public void onBox9Clicked(){
         if(gameStart && lblNo9.getText().equals("")){
             lblNo9.setText(turn.toString());
-            gameState[9] = 1;
+            gameState[8] = 1;
             checkIfWon();
         }
     }
@@ -193,7 +297,7 @@ public class GameController {
     }
 
     public void setBot2(Bot bot){
-        bot1 = bot;
+        bot2 = bot;
     }
 
 }

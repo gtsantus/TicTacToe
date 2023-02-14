@@ -1,6 +1,5 @@
 package aber.ac.uk.tictactoe;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +13,8 @@ public class MenuController {
     private int gameMode = 0;
 
     private Bot bot1;
+
+    private Bot bot2;
     public Button btnPvP;
     public Button btnBvB;
     public Button btnPvB;
@@ -32,9 +33,9 @@ public class MenuController {
     public void onPvPButtonClick() throws IOException {
         gameMode = 0;
         FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource("game-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 700, 500);
         GameController controller = fxmlLoader.getController();
         controller.setGameMode(gameMode);
-        Scene scene = new Scene(fxmlLoader.load(), 700, 500);
         Stage stage = new Stage();
         stage.setTitle("Game");
         stage.setScene(scene);
@@ -71,37 +72,42 @@ public class MenuController {
         btnStart.setVisible(true);
     }
 
-    public void onStartButtonClick(ActionEvent actionEvent) throws IOException {
+    public void onStartButtonClick() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource("game-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 700, 500);
+        GameController controller = fxmlLoader.getController();
         if(gameMode == 1){
-            FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource("game-view.fxml"));
-            GameController controller = fxmlLoader.getController();
             controller.setGameMode(gameMode);
             controller.setBot1(bot1);
-            Scene scene = new Scene(fxmlLoader.load(), 700, 500);
-            Stage stage = new Stage();
-            stage.setTitle("Game");
-            stage.setScene(scene);
-            stage.show();
         }
+        else if(gameMode == 2){
+            controller.setGameMode(gameMode);
+            controller.setBot1(bot1);
+            controller.setBot2(bot2);
+        }
+        Stage stage = new Stage();
+        stage.setTitle("Game");
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void onReinforce1Click(ActionEvent actionEvent) {
+    public void onReinforce1Click() {
     }
 
-    public void onTree1Click(ActionEvent actionEvent) {
+    public void onTree1Click() {
     }
 
-    public void onRandom1Click(ActionEvent actionEvent) {
+    public void onRandom1Click() {
         bot1 = new Bot();
     }
 
-    public void onReinforce2Click(ActionEvent actionEvent) {
+    public void onReinforce2Click() {
     }
 
-    public void onTree2Click(ActionEvent actionEvent) {
+    public void onTree2Click() {
     }
 
-    public void onRandom2Click(ActionEvent actionEvent) {
-        bot1 = new Bot();
+    public void onRandom2Click() {
+        bot2 = new Bot();
     }
 }
