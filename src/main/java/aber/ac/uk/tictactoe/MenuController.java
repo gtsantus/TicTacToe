@@ -52,7 +52,6 @@ public class MenuController {
         btnStart.setVisible(true);
         lblPickABot1.setVisible(true);
         lblCurrentBot1.setVisible(true);
-
     }
 
     public void onBvBButtonClick() {

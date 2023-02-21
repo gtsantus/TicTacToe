@@ -72,4 +72,6 @@
       </font>
    </Label>
    <Button fx:id="btnStart" layoutX="316.0" layoutY="431.0" mnemonicParsing="false" onAction="#onStartButtonClick" prefHeight="38.0" prefWidth="68.0" text="Start" />
+   <Button fx:id="btnNextMove" layoutX="175.0" layoutY="431.0" mnemonicParsing="false" onAction="#onNextMoveClick" prefHeight="38.0" prefWidth="84.0" text="Next Move" visible="false" />
+   <Button fx:id="btnEndGame" layoutX="441.0" layoutY="431.0" mnemonicParsing="false" onAction="#onEndGameClick" prefHeight="38.0" prefWidth="84.0" text="Final State" visible="false" />
 </Pane>

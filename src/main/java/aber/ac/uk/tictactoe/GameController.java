@@ -8,6 +8,7 @@ import java.util.Random;
 public class GameController {
     TURN turn;
     private boolean gameStart = false;
+    private boolean gameFinalState = false;
     private int gameMode;
     private int[] gameState;
 
@@ -24,6 +25,8 @@ public class GameController {
     public Label lblNo9;
     public Label lblTurn;
     public Button btnStart;
+    public Button btnNextMove;
+    public Button btnEndGame;
 
     private void reset(){
         lblNo1.setText("");
@@ -53,38 +56,8 @@ public class GameController {
             lblTurn.setText("Turn: O");
             turn = TURN.O;
         }
-        if(gameMode == 0){
-            gameStart = true;
-        }else if(gameMode == 1){
-            gameStart = true;
-            if(turn == TURN.O){
-                    bot1.setGameState(gameState);
-                    int nextMove = bot1.getNextMove();
-                    for(int i =1; i < 11; i++){
-                        if(i == nextMove && nextMove == 1){
-                            onBox1Clicked();
-                        } else if (i == nextMove && nextMove == 2) {
-                            onBox2Clicked();
-                        } else if (i == nextMove && nextMove == 3) {
-                            onBox3Clicked();
-                        }else if (i == nextMove && nextMove == 4) {
-                            onBox4Clicked();
-                        }else if (i == nextMove && nextMove == 5) {
-                            onBox5Clicked();
-                        }else if (i == nextMove && nextMove == 6) {
-                            onBox6Clicked();
-                        }else if (i == nextMove && nextMove == 7) {
-                            onBox7Clicked();
-                        }else if (i == nextMove && nextMove == 8) {
-                            onBox8Clicked();
-                        }else if (i == nextMove && nextMove == 9) {
-                            onBox9Clicked();
-                        }
-                    }
-            }
-        }
-        else if(gameMode == 2){
-            gameStart = true;
+        gameStart = true;
+        if(gameMode == 1){
             if(turn == TURN.O){
                 bot1.setGameState(gameState);
                 int nextMove = bot1.getNextMove();
@@ -110,37 +83,15 @@ public class GameController {
                     }
                 }
             }
-            if(turn == TURN.X){
-                bot2.setGameState(gameState);
-                int nextMove = bot2.getNextMove();
-                for(int i =1; i < 10; i++){
-                    if(i == nextMove && nextMove == 1){
-                        onBox1Clicked();
-                    } else if (i == nextMove && nextMove == 2) {
-                        onBox2Clicked();
-                    } else if (i == nextMove && nextMove == 3) {
-                        onBox3Clicked();
-                    }else if (i == nextMove && nextMove == 4) {
-                        onBox4Clicked();
-                    }else if (i == nextMove && nextMove == 5) {
-                        onBox5Clicked();
-                    }else if (i == nextMove && nextMove == 6) {
-                        onBox6Clicked();
-                    }else if (i == nextMove && nextMove == 7) {
-                        onBox7Clicked();
-                    }else if (i == nextMove && nextMove == 8) {
-                        onBox8Clicked();
-                    }else if (i == nextMove) {
-                        onBox9Clicked();
-                    }
-                }
-            }
         }
-
     }
 
     public void onStartButtonClick() {
         btnStart.setVisible(false);
+        if(gameMode ==  2){
+            btnEndGame.setVisible(true);
+            btnNextMove.setVisible(true);
+        }
         startGame();
     }
 
@@ -151,6 +102,9 @@ public class GameController {
                     lblNo1.getText().equals(lblNo5.getText()) && lblNo5.getText().equals(lblNo9.getText()) && !lblNo1.getText().equals("") || lblNo3.getText().equals(lblNo5.getText()) && lblNo5.getText().equals(lblNo7.getText()) && !lblNo3.getText().equals("")) {
                         lblTurn.setText(turn.toString() + " wins!");
                         gameStart = false;
+                        btnStart.setVisible(true);
+                        btnEndGame.setVisible(false);
+                        btnNextMove.setVisible(false);
             }else if (gameState[0] != 0 && gameState[1] != 0 && gameState[2] != 0 && gameState[3] != 0 && gameState[4] != 0 && gameState[5] != 0 && gameState[6] != 0 && gameState[7] != 0 && gameState[8] != 0){
                 lblTurn.setText("Draw!");
                 gameStart = false;
@@ -159,7 +113,7 @@ public class GameController {
                 if(turn == TURN.X){
                     lblTurn.setText("Turn: O");
                     turn = TURN.O;
-                    if(gameMode == 1 || gameMode == 2){
+                    if(gameMode == 1){
                         bot1.setGameState(gameState);
                         int nextMove = bot1.getNextMove();
                         for(int i =1; i < 11; i++){
@@ -183,34 +137,14 @@ public class GameController {
                                 onBox9Clicked();
                             }
                         }
+                    }else if (gameMode == 2 && gameFinalState){
+                        onNextMoveClick();
                     }
                 }else{
                     lblTurn.setText("Turn: X");
                     turn = TURN.X;
-                    if(gameMode == 2){
-                        bot2.setGameState(gameState);
-                        int nextMove = bot2.getNextMove();
-                        for(int i =1; i < 11; i++){
-                            if(i == nextMove && nextMove == 1){
-                                onBox1Clicked();
-                            } else if (i == nextMove && nextMove == 2) {
-                                onBox2Clicked();
-                            } else if (i == nextMove && nextMove == 3) {
-                                onBox3Clicked();
-                            }else if (i == nextMove && nextMove == 4) {
-                                onBox4Clicked();
-                            }else if (i == nextMove && nextMove == 5) {
-                                onBox5Clicked();
-                            }else if (i == nextMove && nextMove == 6) {
-                                onBox6Clicked();
-                            }else if (i == nextMove && nextMove == 7) {
-                                onBox7Clicked();
-                            }else if (i == nextMove && nextMove == 8) {
-                                onBox8Clicked();
-                            }else if (i == nextMove && nextMove == 9) {
-                                onBox9Clicked();
-                            }
-                        }
+                    if(gameMode == 2 && gameFinalState){
+                        onNextMoveClick();
                     }
                 }
             }
@@ -300,4 +234,64 @@ public class GameController {
         bot2 = bot;
     }
 
+    public void onNextMoveClick() {
+        if(turn == TURN.X){
+            if(gameMode == 1 || gameMode == 2){
+                bot1.setGameState(gameState);
+                int nextMove = bot1.getNextMove();
+                for(int i =1; i < 11; i++){
+                    if(i == nextMove && nextMove == 1){
+                        onBox1Clicked();
+                    } else if (i == nextMove && nextMove == 2) {
+                        onBox2Clicked();
+                    } else if (i == nextMove && nextMove == 3) {
+                        onBox3Clicked();
+                    }else if (i == nextMove && nextMove == 4) {
+                        onBox4Clicked();
+                    }else if (i == nextMove && nextMove == 5) {
+                        onBox5Clicked();
+                    }else if (i == nextMove && nextMove == 6) {
+                        onBox6Clicked();
+                    }else if (i == nextMove && nextMove == 7) {
+                        onBox7Clicked();
+                    }else if (i == nextMove && nextMove == 8) {
+                        onBox8Clicked();
+                    }else if (i == nextMove && nextMove == 9) {
+                        onBox9Clicked();
+                    }
+                }
+            }
+        }else {
+            if (gameMode == 2) {
+                bot2.setGameState(gameState);
+                int nextMove = bot2.getNextMove();
+                for (int i = 1; i < 11; i++) {
+                    if (i == nextMove && nextMove == 1) {
+                        onBox1Clicked();
+                    } else if (i == nextMove && nextMove == 2) {
+                        onBox2Clicked();
+                    } else if (i == nextMove && nextMove == 3) {
+                        onBox3Clicked();
+                    } else if (i == nextMove && nextMove == 4) {
+                        onBox4Clicked();
+                    } else if (i == nextMove && nextMove == 5) {
+                        onBox5Clicked();
+                    } else if (i == nextMove && nextMove == 6) {
+                        onBox6Clicked();
+                    } else if (i == nextMove && nextMove == 7) {
+                        onBox7Clicked();
+                    } else if (i == nextMove && nextMove == 8) {
+                        onBox8Clicked();
+                    } else if (i == nextMove && nextMove == 9) {
+                        onBox9Clicked();
+                    }
+                }
+            }
+        }
+    }
+
+    public void onEndGameClick() {
+        gameFinalState = true;
+        onNextMoveClick();
+    }
 }
