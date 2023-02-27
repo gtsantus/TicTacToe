@@ -13,16 +13,7 @@ public class Bot {
     }
 
     public int getNextMove(){
-        Random rand = new Random();
-        int move = rand.nextInt(1,10);
-        while (true){
-            if(gameState[move-1] == 0){
-                return move;
-            }
-            else{
-                move = rand.nextInt(1,10);
-            }
-        }
+        return 0;
     }
 
     public void setGameState(int[] newState){

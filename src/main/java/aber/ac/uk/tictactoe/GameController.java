@@ -10,7 +10,7 @@ public class GameController {
     private boolean gameStart = false;
     private boolean gameFinalState = false;
     private int gameMode;
-    private int[] gameState;
+    private int[] masterGameState;
 
     private Bot bot1;
     private Bot bot2;
@@ -38,9 +38,9 @@ public class GameController {
         lblNo7.setText("");
         lblNo8.setText("");
         lblNo9.setText("");
-        gameState = new int[9];
-        for (int i: gameState) {
-            gameState[i] = 0;
+        masterGameState = new int[9];
+        for (int i: masterGameState) {
+            masterGameState[i] = 0;
         }
     }
 
@@ -59,26 +59,26 @@ public class GameController {
         gameStart = true;
         if(gameMode == 1){
             if(turn == TURN.O){
-                bot1.setGameState(gameState);
+                bot1.setGameState(masterGameState);
                 int nextMove = bot1.getNextMove();
-                for(int i =1; i < 11; i++){
-                    if(i == nextMove && nextMove == 1){
+                for(int i =0; i < 9; i++){
+                    if(i == nextMove && nextMove == 0){
                         onBox1Clicked();
-                    } else if (i == nextMove && nextMove == 2) {
+                    } else if (i == nextMove && nextMove == 1) {
                         onBox2Clicked();
-                    } else if (i == nextMove && nextMove == 3) {
+                    } else if (i == nextMove && nextMove == 2) {
                         onBox3Clicked();
-                    }else if (i == nextMove && nextMove == 4) {
+                    }else if (i == nextMove && nextMove == 3) {
                         onBox4Clicked();
-                    }else if (i == nextMove && nextMove == 5) {
+                    }else if (i == nextMove && nextMove == 4) {
                         onBox5Clicked();
-                    }else if (i == nextMove && nextMove == 6) {
+                    }else if (i == nextMove && nextMove == 5) {
                         onBox6Clicked();
-                    }else if (i == nextMove && nextMove == 7) {
+                    }else if (i == nextMove && nextMove == 6) {
                         onBox7Clicked();
-                    }else if (i == nextMove && nextMove == 8) {
+                    }else if (i == nextMove && nextMove == 7) {
                         onBox8Clicked();
-                    }else if (i == nextMove && nextMove == 9) {
+                    }else if (i == nextMove && nextMove == 8) {
                         onBox9Clicked();
                     }
                 }
@@ -105,7 +105,7 @@ public class GameController {
                         btnStart.setVisible(true);
                         btnEndGame.setVisible(false);
                         btnNextMove.setVisible(false);
-            }else if (gameState[0] != 0 && gameState[1] != 0 && gameState[2] != 0 && gameState[3] != 0 && gameState[4] != 0 && gameState[5] != 0 && gameState[6] != 0 && gameState[7] != 0 && gameState[8] != 0){
+            }else if (masterGameState[0] != 0 && masterGameState[1] != 0 && masterGameState[2] != 0 && masterGameState[3] != 0 && masterGameState[4] != 0 && masterGameState[5] != 0 && masterGameState[6] != 0 && masterGameState[7] != 0 && masterGameState[8] != 0){
                 lblTurn.setText("Draw!");
                 gameStart = false;
             }
@@ -114,7 +114,7 @@ public class GameController {
                     lblTurn.setText("Turn: O");
                     turn = TURN.O;
                     if(gameMode == 1){
-                        bot1.setGameState(gameState);
+                        bot1.setGameState(masterGameState);
                         int nextMove = bot1.getNextMove();
                         for(int i =1; i < 11; i++){
                             if(i == nextMove && nextMove == 1){
@@ -153,7 +153,12 @@ public class GameController {
     public void onBox1Clicked(){
         if(gameStart && lblNo1.getText().equals("")){
             lblNo1.setText(turn.toString());
-            gameState[0] = 1;
+            if(turn == TURN.X){
+                masterGameState[0] = 1;
+            }
+            else{
+                masterGameState[0] = 2;
+            }
             checkIfWon();
         }
     }
@@ -161,7 +166,12 @@ public class GameController {
     public void onBox2Clicked(){
         if(gameStart && lblNo2.getText().equals("")){
             lblNo2.setText(turn.toString());
-            gameState[1] = 1;
+            if(turn == TURN.X){
+                masterGameState[1] = 1;
+            }
+            else{
+                masterGameState[1] = 2;
+            }
             checkIfWon();
         }
     }
@@ -169,7 +179,12 @@ public class GameController {
     public void onBox3Clicked(){
         if(gameStart && lblNo3.getText().equals("")){
             lblNo3.setText(turn.toString());
-            gameState[2] = 1;
+            if(turn == TURN.X){
+                masterGameState[2] = 1;
+            }
+            else{
+                masterGameState[2] = 2;
+            }
             checkIfWon();
         }
     }
@@ -177,7 +192,12 @@ public class GameController {
     public void onBox4Clicked(){
         if(gameStart && lblNo4.getText().equals("")){
             lblNo4.setText(turn.toString());
-            gameState[3] = 1;
+            if(turn == TURN.X){
+                masterGameState[3] = 1;
+            }
+            else{
+                masterGameState[3] = 2;
+            }
             checkIfWon();
         }
     }
@@ -185,7 +205,12 @@ public class GameController {
     public void onBox5Clicked(){
         if(gameStart && lblNo5.getText().equals("")){
             lblNo5.setText(turn.toString());
-            gameState[4] = 1;
+            if(turn == TURN.X){
+                masterGameState[4] = 1;
+            }
+            else{
+                masterGameState[4] = 2;
+            }
             checkIfWon();
         }
     }
@@ -193,7 +218,12 @@ public class GameController {
     public void onBox6Clicked(){
         if(gameStart && lblNo6.getText().equals("")){
             lblNo6.setText(turn.toString());
-            gameState[5] = 1;
+            if(turn == TURN.X){
+                masterGameState[5] = 1;
+            }
+            else{
+                masterGameState[5] = 2;
+            }
             checkIfWon();
         }
     }
@@ -201,7 +231,12 @@ public class GameController {
     public void onBox7Clicked(){
         if(gameStart && lblNo7.getText().equals("")){
             lblNo7.setText(turn.toString());
-            gameState[6] = 1;
+            if(turn == TURN.X){
+                masterGameState[6] = 1;
+            }
+            else{
+                masterGameState[6] = 2;
+            }
             checkIfWon();
         }
     }
@@ -209,7 +244,12 @@ public class GameController {
     public void onBox8Clicked(){
         if(gameStart && lblNo8.getText().equals("")){
             lblNo8.setText(turn.toString());
-            gameState[7] = 1;
+            if(turn == TURN.X){
+                masterGameState[7] = 1;
+            }
+            else{
+                masterGameState[7] = 2;
+            }
             checkIfWon();
         }
     }
@@ -217,7 +257,12 @@ public class GameController {
     public void onBox9Clicked(){
         if(gameStart && lblNo9.getText().equals("")){
             lblNo9.setText(turn.toString());
-            gameState[8] = 1;
+            if(turn == TURN.X){
+                masterGameState[8] = 1;
+            }
+            else{
+                masterGameState[8] = 2;
+            }
             checkIfWon();
         }
     }
@@ -237,7 +282,7 @@ public class GameController {
     public void onNextMoveClick() {
         if(turn == TURN.X){
             if(gameMode == 1 || gameMode == 2){
-                bot1.setGameState(gameState);
+                bot1.setGameState(masterGameState);
                 int nextMove = bot1.getNextMove();
                 for(int i =1; i < 11; i++){
                     if(i == nextMove && nextMove == 1){
@@ -263,7 +308,7 @@ public class GameController {
             }
         }else {
             if (gameMode == 2) {
-                bot2.setGameState(gameState);
+                bot2.setGameState(masterGameState);
                 int nextMove = bot2.getNextMove();
                 for (int i = 1; i < 11; i++) {
                     if (i == nextMove && nextMove == 1) {

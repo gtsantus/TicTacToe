@@ -13,7 +13,6 @@ public class MenuController {
     private int gameMode = 0;
 
     private Bot bot1;
-
     private Bot bot2;
     public Button btnPvP;
     public Button btnBvB;
@@ -94,19 +93,21 @@ public class MenuController {
     }
 
     public void onTree1Click() {
+        bot1 = new TreeBot(1);
     }
 
     public void onRandom1Click() {
-        bot1 = new Bot();
+        bot1 = new RandomBot();
     }
 
     public void onReinforce2Click() {
     }
 
     public void onTree2Click() {
+        bot2 = new TreeBot(2);
     }
 
     public void onRandom2Click() {
-        bot2 = new Bot();
+        bot2 = new RandomBot();
     }
 }
