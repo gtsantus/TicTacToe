@@ -1,10 +1,5 @@
 package aber.ac.uk.tictactoe;
 
-import javafx.util.Pair;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
 
 public class TreeBot extends Bot{
     private int[] gameState;
@@ -43,19 +38,23 @@ public class TreeBot extends Bot{
     private int[] maxValue(int[] currentGameState){
         //input game state
         //output the move with the most utility (or least if player is = 2)
+        int[] temp = new int[9];
         int[] vm = new int[2];
-        if(isTerminal(currentGameState)){
-            vm[0] = utility(currentGameState);
+        System.arraycopy(currentGameState, 0, temp, 0, 9);
+
+        if(isTerminal(temp)){
+            vm[0] = vm[0] + utility(temp);
             return vm;
         }
         vm[0] = -1000;
         for(int i =0; i < 9; i++){
-            if(currentGameState[i] == 0){
-                currentGameState[i] = 1;
-                int[] temp = minValue(currentGameState);
+            if(temp[i] == 0){
+                temp[i] = 2;
+                int[] temp2 = minValue(temp);
                 int[] vm2 = new int[2];
-                vm2[0] = temp[0];
-                vm2[1] = temp[1];
+                temp[i] = 0;
+                vm2[0] = temp2[0];
+                vm2[1] = temp2[1];
                 if(vm2[0] > vm[0]){
                     vm[0] = vm2[0];
                     vm[1] = i;
@@ -63,33 +62,29 @@ public class TreeBot extends Bot{
             }
         }
         return vm;
-        //if the current state is terminal then return game.UTILITY (state, player), null
-        //v = -1000
-        //move = 0
-        //for each available action (a) do
-        //v2, move2 = minValue (game, game.Result(state, a))
-        //if v2 > v then
-        //  v, move = v2, a
-        //return v, move
     }
 
     private int[] minValue (int[] currentGameState){
-        //input game state
-        //output move and utility
+        //currently doesn't work how I want it to. What I want it to do is fill out the game tree and calculate the utility of each state according to how many positive and
+        //negative end states that state can lead to.
 
+        int[] temp = new int[9];
         int[] vm = new int[2];
-        if(isTerminal(currentGameState)){
-            vm[0] = utility(currentGameState);
+        System.arraycopy(currentGameState, 0, temp, 0, 9);
+
+        if(isTerminal(temp)){
+            vm[0] = vm[0] + utility(temp);
             return vm;
         }
         vm[0] = 1000;
         for(int i =0; i < 9; i++){
-            if(currentGameState[i] == 0){
-                currentGameState[i] = 2;
-                int[] temp = minValue(currentGameState);
+            if(temp[i] == 0){
+                temp[i] = 1;
+                int[] temp2 = maxValue(temp);
                 int[] vm2 = new int[2];
-                vm2[0] = temp[0];
-                vm2[1] = temp[1];
+                currentGameState[i] = 0;
+                vm2[0] = temp2[0];
+                vm2[1] = temp2[1];
                 if(vm2[0] < vm[0]){
                     vm[0] = vm2[0];
                     vm[1] = i;
