@@ -108,6 +108,9 @@ public class GameController {
             }else if (masterGameState[0] != 0 && masterGameState[1] != 0 && masterGameState[2] != 0 && masterGameState[3] != 0 && masterGameState[4] != 0 && masterGameState[5] != 0 && masterGameState[6] != 0 && masterGameState[7] != 0 && masterGameState[8] != 0){
                 lblTurn.setText("Draw!");
                 gameStart = false;
+                btnStart.setVisible(true);
+                btnEndGame.setVisible(false);
+                btnNextMove.setVisible(false);
             }
             else{
                 if(turn == TURN.X){
@@ -116,24 +119,24 @@ public class GameController {
                     if(gameMode == 1){
                         bot1.setGameState(masterGameState);
                         int nextMove = bot1.getNextMove();
-                        for(int i =1; i < 11; i++){
-                            if(i == nextMove && nextMove == 1){
+                        for (int i = 0; i < 9; i++) {
+                            if (i == nextMove && nextMove == 0) {
                                 onBox1Clicked();
-                            } else if (i == nextMove && nextMove == 2) {
+                            } else if (i == nextMove && nextMove == 1) {
                                 onBox2Clicked();
-                            } else if (i == nextMove && nextMove == 3) {
+                            } else if (i == nextMove && nextMove == 2) {
                                 onBox3Clicked();
-                            }else if (i == nextMove && nextMove == 4) {
+                            } else if (i == nextMove && nextMove == 3) {
                                 onBox4Clicked();
-                            }else if (i == nextMove && nextMove == 5) {
+                            } else if (i == nextMove && nextMove == 4) {
                                 onBox5Clicked();
-                            }else if (i == nextMove && nextMove == 6) {
+                            } else if (i == nextMove && nextMove == 5) {
                                 onBox6Clicked();
-                            }else if (i == nextMove && nextMove == 7) {
+                            } else if (i == nextMove && nextMove == 6) {
                                 onBox7Clicked();
-                            }else if (i == nextMove && nextMove == 8) {
+                            } else if (i == nextMove && nextMove == 7) {
                                 onBox8Clicked();
-                            }else if (i == nextMove && nextMove == 9) {
+                            } else if (i == nextMove && nextMove == 8){
                                 onBox9Clicked();
                             }
                         }
@@ -284,24 +287,24 @@ public class GameController {
             if(gameMode == 1 || gameMode == 2){
                 bot1.setGameState(masterGameState);
                 int nextMove = bot1.getNextMove();
-                for(int i =1; i < 11; i++){
-                    if(i == nextMove && nextMove == 1){
+                for (int i = 0; i < 9; i++) {
+                    if (i == nextMove && nextMove == 0) {
                         onBox1Clicked();
-                    } else if (i == nextMove && nextMove == 2) {
+                    } else if (i == nextMove && nextMove == 1) {
                         onBox2Clicked();
-                    } else if (i == nextMove && nextMove == 3) {
+                    } else if (i == nextMove && nextMove == 2) {
                         onBox3Clicked();
-                    }else if (i == nextMove && nextMove == 4) {
+                    } else if (i == nextMove && nextMove == 3) {
                         onBox4Clicked();
-                    }else if (i == nextMove && nextMove == 5) {
+                    } else if (i == nextMove && nextMove == 4) {
                         onBox5Clicked();
-                    }else if (i == nextMove && nextMove == 6) {
+                    } else if (i == nextMove && nextMove == 5) {
                         onBox6Clicked();
-                    }else if (i == nextMove && nextMove == 7) {
+                    } else if (i == nextMove && nextMove == 6) {
                         onBox7Clicked();
-                    }else if (i == nextMove && nextMove == 8) {
+                    } else if (i == nextMove && nextMove == 7) {
                         onBox8Clicked();
-                    }else if (i == nextMove && nextMove == 9) {
+                    } else if (i == nextMove && nextMove == 8){
                         onBox9Clicked();
                     }
                 }
@@ -310,24 +313,24 @@ public class GameController {
             if (gameMode == 2) {
                 bot2.setGameState(masterGameState);
                 int nextMove = bot2.getNextMove();
-                for (int i = 1; i < 11; i++) {
-                    if (i == nextMove && nextMove == 1) {
+                for (int i = 0; i < 9; i++) {
+                    if (i == nextMove && nextMove == 0) {
                         onBox1Clicked();
-                    } else if (i == nextMove && nextMove == 2) {
+                    } else if (i == nextMove && nextMove == 1) {
                         onBox2Clicked();
-                    } else if (i == nextMove && nextMove == 3) {
+                    } else if (i == nextMove && nextMove == 2) {
                         onBox3Clicked();
-                    } else if (i == nextMove && nextMove == 4) {
+                    } else if (i == nextMove && nextMove == 3) {
                         onBox4Clicked();
-                    } else if (i == nextMove && nextMove == 5) {
+                    } else if (i == nextMove && nextMove == 4) {
                         onBox5Clicked();
-                    } else if (i == nextMove && nextMove == 6) {
+                    } else if (i == nextMove && nextMove == 5) {
                         onBox6Clicked();
-                    } else if (i == nextMove && nextMove == 7) {
+                    } else if (i == nextMove && nextMove == 6) {
                         onBox7Clicked();
-                    } else if (i == nextMove && nextMove == 8) {
+                    } else if (i == nextMove && nextMove == 7) {
                         onBox8Clicked();
-                    } else if (i == nextMove && nextMove == 9) {
+                    } else if (i == nextMove && nextMove == 8) {
                         onBox9Clicked();
                     }
                 }

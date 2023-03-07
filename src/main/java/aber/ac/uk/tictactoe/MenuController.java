@@ -93,7 +93,7 @@ public class MenuController {
     }
 
     public void onTree1Click() {
-        bot1 = new TreeBot(1);
+        bot1 = new TreeBot(2);
     }
 
     public void onRandom1Click() {
@@ -104,7 +104,7 @@ public class MenuController {
     }
 
     public void onTree2Click() {
-        bot2 = new TreeBot(2);
+        bot2 = new TreeBot(1);
     }
 
     public void onRandom2Click() {
