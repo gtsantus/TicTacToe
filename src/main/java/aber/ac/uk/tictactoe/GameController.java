@@ -89,6 +89,7 @@ public class GameController {
     public void onStartButtonClick() {
         btnStart.setVisible(false);
         if(gameMode ==  2){
+            gameFinalState = false;
             btnEndGame.setVisible(true);
             btnNextMove.setVisible(true);
         }
@@ -284,9 +285,9 @@ public class GameController {
 
     public void onNextMoveClick() {
         if(turn == TURN.X){
-            if(gameMode == 1 || gameMode == 2){
-                bot1.setGameState(masterGameState);
-                int nextMove = bot1.getNextMove();
+            if(gameMode == 2){
+                bot2.setGameState(masterGameState);
+                int nextMove = bot2.getNextMove();
                 for (int i = 0; i < 9; i++) {
                     if (i == nextMove && nextMove == 0) {
                         onBox1Clicked();
@@ -311,8 +312,8 @@ public class GameController {
             }
         }else {
             if (gameMode == 2) {
-                bot2.setGameState(masterGameState);
-                int nextMove = bot2.getNextMove();
+                bot1.setGameState(masterGameState);
+                int nextMove = bot1.getNextMove();
                 for (int i = 0; i < 9; i++) {
                     if (i == nextMove && nextMove == 0) {
                         onBox1Clicked();

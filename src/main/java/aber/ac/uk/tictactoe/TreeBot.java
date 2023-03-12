@@ -1,11 +1,7 @@
 package aber.ac.uk.tictactoe;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 public class TreeBot extends Bot{
-    private int[] gameState;
+    private final int[] gameState;
     private final int player;
 
     public TreeBot(int newPlayer){
@@ -19,51 +15,40 @@ public class TreeBot extends Bot{
 
     public int getNextMove(){
         State tree = generateTree();
-        //return minMaxSearch(tree, 10, true);
-        return highestValue(tree);
+        return minMaxSearch(tree, 10, true).getMove();
     }
 
-    private int highestValue(State current){
-        int maxVal = -5000;
-        int move = -1;
-        for (State child: current.getChildren()) {
-            if(child.getValue() > maxVal){
-                move = child.getMove();
-                maxVal = child.getValue();
-            }
-        }
-        return move;
-    }
-
-    private int minMaxSearch (State current, int depth, boolean maximizingPlayer){
-            int move = -1;
+    private State minMaxSearch (State current, int depth, boolean maximizingPlayer){
             if(depth == 0 || current.isTerminal()){
-                return current.getValue() * depth;
+                current.setValue(current.getValue() * depth);
+                return current;
             }
 
             if(maximizingPlayer){
-                int maxEval = -100;
-                int eval;
+                State maxTemp = new State();
+                maxTemp.setValue(-5000);
+                State temp = new State();
                 for (State child: current.getChildren()) {
-                    eval = minMaxSearch(child, depth - 1, false);
-                    if(eval > maxEval){
-                        maxEval = eval;
-                        move = child.getMove();
+                    temp.copy(minMaxSearch(child, depth - 1, false));
+                    if(temp.getValue() > maxTemp.getValue()){
+                        maxTemp.copy(temp);
+                        maxTemp.setMove(child.getMove());
                     }
                 }
-                return move;
+                return maxTemp;
             }
             else{
-                int minEval = 100;
-                int eval;
+                State minTemp = new State();
+                minTemp.setValue(5000);
+                State temp = new State();
                 for (State child: current.getChildren()) {
-                    eval = minMaxSearch(child, depth - 1, true);
-                    if(eval < minEval){
-                        minEval = eval;
-                        move = child.getMove();
+                    temp.copy(minMaxSearch(child, depth - 1, true));
+                    if(temp.getValue() < minTemp.getValue()){
+                        minTemp.copy(temp);
+                        minTemp.setMove(child.getMove());
                     }
                 }
-                return move;
+                return minTemp;
             }
     }
 
@@ -74,9 +59,9 @@ public class TreeBot extends Bot{
                 newGameState[1] == newGameState[4] && newGameState[4] == newGameState[7] && newGameState[1] == 1 || newGameState[2] == newGameState[5] && newGameState[5] == newGameState[8] && newGameState[2] == 1 ||
                 newGameState[0] == newGameState[4] && newGameState[4] == newGameState[8] && newGameState[0] == 1|| newGameState[2] == newGameState[4] && newGameState[4] == newGameState[6] && newGameState[2] == 1){
             if(player == 1){
-                return -1;
-            }else if (player == 2){
                 return 1;
+            }else if (player == 2){
+                return -1;
             }
         }
         else if(newGameState[0] == newGameState[1] && newGameState[1] == newGameState[2] && newGameState[0] == 2 || newGameState[3] == newGameState[4] && newGameState[4] == newGameState[5] && newGameState[3] == 2 ||
@@ -94,7 +79,7 @@ public class TreeBot extends Bot{
 
     private State generateTree(){
         State root = new State(gameState);
-        fillGameTree(root, 2);
+        fillGameTree(root, player);
         return root;
     }
 
@@ -103,6 +88,7 @@ public class TreeBot extends Bot{
             State childState = new State(parentState, space);
             parentState.getChildren().add(childState);
             childState.getGameState()[space] = currentPlayer;
+            childState.checkTerminal();
 
             if(childState.isTerminal()){
                 childState.setValue(utility(childState.getGameState()));
@@ -114,7 +100,6 @@ public class TreeBot extends Bot{
                     fillGameTree(childState, 1);
                 }
             }
-            parentState.setValue(parentState.getValue() + childState.getValue());
         }
     }
 }

@@ -17,6 +17,11 @@ public class State {
         System.arraycopy(newState, 0, gameState, 0, 9);
     }
 
+    public State() {
+        gameState = new int[9];
+        children = new ArrayList<State>();
+    }
+
     public State getParent() {
         return parent;
     }
@@ -57,15 +62,13 @@ public class State {
         return terminal;
     }
 
-    private void checkTerminal(){
+    public void checkTerminal(){
          terminal = gameState[0] == gameState[1] && gameState[1] == gameState[2] && gameState[0] != 0 || gameState[3] == gameState[4] && gameState[4] == gameState[5] && gameState[3] != 0 ||
                 gameState[6] == gameState[7] && gameState[7] == gameState[8] && gameState[6] != 0 || gameState[0] == gameState[3] && gameState[3] == gameState[6] && gameState[0] != 0 ||
                 gameState[1] == gameState[4] && gameState[4] == gameState[7] && gameState[1] != 0 || gameState[2] == gameState[5] && gameState[5] == gameState[8] && gameState[2] != 0 ||
                 gameState[0] == gameState[4] && gameState[4] == gameState[8] && gameState[0] != 0|| gameState[2] == gameState[4] && gameState[4] == gameState[6] && gameState[2] != 0 ||
                 gameState[0] != 0 && gameState[1] != 0 && gameState[2] != 0 && gameState[3] != 0 && gameState[4] != 0 && gameState[5] != 0 && gameState[6] != 0 && gameState[7] != 0 && gameState[8] != 0;
     }
-
-
 
     public ArrayList<Integer> getAvailableSpaces(){
         ArrayList<Integer> available = new ArrayList<Integer>();
@@ -75,5 +78,14 @@ public class State {
             }
         }
         return available;
+    }
+
+    public void copy(State target){
+        value = target.getValue();
+        move = target.getMove();
+        System.arraycopy(gameState, 0, target.getGameState(), 0, 9);
+        terminal = target.isTerminal();
+        children.clear();
+        children.addAll(target.getChildren());
     }
 }
