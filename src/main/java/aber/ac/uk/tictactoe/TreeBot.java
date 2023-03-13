@@ -15,10 +15,10 @@ public class TreeBot extends Bot{
 
     public int getNextMove(){
         State tree = generateTree();
-        return minMaxSearch(tree, 10, true).getMove();
+        return minMaxSearch(tree, 10, -6000, 6000, true).getMove();
     }
 
-    private State minMaxSearch (State current, int depth, boolean maximizingPlayer){
+    private State minMaxSearch (State current, int depth, int alpha, int beta, boolean maximizingPlayer){
             if(depth == 0 || current.isTerminal()){
                 current.setValue(current.getValue() * depth);
                 return current;
@@ -29,10 +29,16 @@ public class TreeBot extends Bot{
                 maxTemp.setValue(-5000);
                 State temp = new State();
                 for (State child: current.getChildren()) {
-                    temp.copy(minMaxSearch(child, depth - 1, false));
+                    temp.copy(minMaxSearch(child, depth - 1, alpha, beta, false));
                     if(temp.getValue() > maxTemp.getValue()){
                         maxTemp.copy(temp);
                         maxTemp.setMove(child.getMove());
+                    }
+                    if(maxTemp.getValue() > alpha){
+                        alpha = maxTemp.getValue();
+                        if(beta <= alpha){
+                            break;
+                        }
                     }
                 }
                 return maxTemp;
@@ -42,10 +48,16 @@ public class TreeBot extends Bot{
                 minTemp.setValue(5000);
                 State temp = new State();
                 for (State child: current.getChildren()) {
-                    temp.copy(minMaxSearch(child, depth - 1, true));
+                    temp.copy(minMaxSearch(child, depth - 1, alpha, beta, true));
                     if(temp.getValue() < minTemp.getValue()){
                         minTemp.copy(temp);
                         minTemp.setMove(child.getMove());
+                    }
+                    if(minTemp.getValue() < beta){
+                        beta = minTemp.getValue();
+                        if(beta <= alpha){
+                            break;
+                        }
                     }
                 }
                 return minTemp;

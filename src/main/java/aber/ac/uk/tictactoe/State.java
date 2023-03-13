@@ -9,29 +9,23 @@ public class State {
     private int move;
     private boolean terminal;
     private final List<State> children;
-    private State parent;
 
     public State (int[] newState){
         gameState = new int[9];
-        children = new ArrayList<State>();
+        children = new ArrayList<>();
         System.arraycopy(newState, 0, gameState, 0, 9);
     }
 
     public State() {
         gameState = new int[9];
-        children = new ArrayList<State>();
-    }
-
-    public State getParent() {
-        return parent;
+        children = new ArrayList<>();
     }
 
     public State(State parent, int move){
         gameState = new int[9];
-        children = new ArrayList<State>();
+        children = new ArrayList<>();
         this.move = move;
         System.arraycopy(parent.getGameState(), 0, gameState, 0, 9);
-        this.parent = parent;
         checkTerminal();
     }
 
@@ -71,7 +65,7 @@ public class State {
     }
 
     public ArrayList<Integer> getAvailableSpaces(){
-        ArrayList<Integer> available = new ArrayList<Integer>();
+        ArrayList<Integer> available = new ArrayList<>();
         for(int i =0; i < 9; i++){
             if(gameState[i] == 0){
                 available.add(i);

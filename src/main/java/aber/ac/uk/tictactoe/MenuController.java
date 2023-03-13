@@ -10,6 +10,7 @@ import java.io.IOException;
 
 public class MenuController {
 
+    public Button btnBack;
     private int gameMode = 0;
 
     private Bot bot1;
@@ -51,6 +52,7 @@ public class MenuController {
         btnStart.setVisible(true);
         lblPickABot1.setVisible(true);
         lblCurrentBot1.setVisible(true);
+        btnBack.setVisible(true);
     }
 
     public void onBvBButtonClick() {
@@ -68,6 +70,7 @@ public class MenuController {
         lblPickABot2.setVisible(true);
         lblCurrentBot2.setVisible(true);
         btnStart.setVisible(true);
+        btnBack.setVisible(true);
     }
 
     public void onStartButtonClick() throws IOException {
@@ -90,6 +93,7 @@ public class MenuController {
     }
 
     public void onReinforce1Click() {
+        bot1 = new ReinforcementBot();
     }
 
     public void onTree1Click() {
@@ -101,6 +105,7 @@ public class MenuController {
     }
 
     public void onReinforce2Click() {
+        bot2 = new ReinforcementBot();
     }
 
     public void onTree2Click() {
@@ -109,5 +114,24 @@ public class MenuController {
 
     public void onRandom2Click() {
         bot2 = new RandomBot();
+    }
+
+    public void onBackButtonClick() {
+        gameMode = 0;
+        btnPvP.setVisible(true);
+        btnPvB.setVisible(true);
+        btnBvB.setVisible(true);
+        btnRandom1.setVisible(false);
+        btnReinforce1.setVisible(false);
+        btnTree1.setVisible(false);
+        lblPickABot1.setVisible(false);
+        lblCurrentBot1.setVisible(false);
+        btnRandom2.setVisible(false);
+        btnReinforce2.setVisible(false);
+        btnTree2.setVisible(false);
+        lblPickABot2.setVisible(false);
+        lblCurrentBot2.setVisible(false);
+        btnStart.setVisible(false);
+        btnBack.setVisible(false);
     }
 }

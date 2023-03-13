@@ -1,7 +1,5 @@
 package aber.ac.uk.tictactoe;
 
-import java.util.Random;
-
 public class Bot {
     private int[] gameState;
 

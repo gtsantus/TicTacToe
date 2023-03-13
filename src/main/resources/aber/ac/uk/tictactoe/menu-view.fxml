@@ -45,11 +45,12 @@
          <Font size="17.0" />
       </font>
    </Label>
-   <Button fx:id="btnStart" layoutX="306.0" layoutY="418.0" mnemonicParsing="false" onAction="#onStartButtonClick" prefHeight="30.0" prefWidth="90.0" text="Start" visible="false" />
+   <Button fx:id="btnStart" layoutX="394.0" layoutY="426.0" mnemonicParsing="false" onAction="#onStartButtonClick" prefHeight="30.0" prefWidth="90.0" text="Start" visible="false" />
    <Label fx:id="lblCurrentBot1" alignment="CENTER" layoutX="38.0" layoutY="192.0" prefHeight="30.0" prefWidth="129.0" visible="false">
       <font>
          <Font size="17.0" />
       </font>
    </Label>
+   <Button fx:id="btnBack" layoutX="218.0" layoutY="426.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="30.0" prefWidth="90.0" text="Back" visible="false" />
    
 </Pane>
