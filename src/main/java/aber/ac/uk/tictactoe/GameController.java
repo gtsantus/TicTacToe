@@ -3,6 +3,7 @@ package aber.ac.uk.tictactoe;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class GameController {
@@ -102,12 +103,14 @@ public class GameController {
                     lblNo2.getText().equals(lblNo5.getText()) && lblNo5.getText().equals(lblNo8.getText()) && !lblNo2.getText().equals("") || lblNo3.getText().equals(lblNo6.getText()) && lblNo6.getText().equals(lblNo9.getText()) && !lblNo3.getText().equals("") ||
                     lblNo1.getText().equals(lblNo5.getText()) && lblNo5.getText().equals(lblNo9.getText()) && !lblNo1.getText().equals("") || lblNo3.getText().equals(lblNo5.getText()) && lblNo5.getText().equals(lblNo7.getText()) && !lblNo3.getText().equals("")) {
                         lblTurn.setText(turn.toString() + " wins!");
+                        bot1.update();
                         gameStart = false;
                         btnStart.setVisible(true);
                         btnEndGame.setVisible(false);
                         btnNextMove.setVisible(false);
             }else if (masterGameState[0] != 0 && masterGameState[1] != 0 && masterGameState[2] != 0 && masterGameState[3] != 0 && masterGameState[4] != 0 && masterGameState[5] != 0 && masterGameState[6] != 0 && masterGameState[7] != 0 && masterGameState[8] != 0){
                 lblTurn.setText("Draw!");
+                bot1.update();
                 gameStart = false;
                 btnStart.setVisible(true);
                 btnEndGame.setVisible(false);

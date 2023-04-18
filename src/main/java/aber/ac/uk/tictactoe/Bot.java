@@ -1,13 +1,10 @@
 package aber.ac.uk.tictactoe;
 
 public class Bot {
-    private int[] gameState;
+    private final int[] gameState;
 
     public Bot(){
         gameState = new int[9];
-        for (int i: gameState) {
-            gameState[i] = 0;
-        }
     }
 
     public int getNextMove(){
@@ -15,6 +12,10 @@ public class Bot {
     }
 
     public void setGameState(int[] newState){
-        gameState = newState;
+        System.arraycopy(newState, 0, gameState, 0, 9);
+    }
+
+    public void update() {
+
     }
 }

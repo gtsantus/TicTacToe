@@ -93,7 +93,7 @@ public class MenuController {
     }
 
     public void onReinforce1Click() {
-        bot1 = new ReinforcementBot();
+        bot1 = new ReinforcementBot(2);
     }
 
     public void onTree1Click() {
@@ -105,7 +105,7 @@ public class MenuController {
     }
 
     public void onReinforce2Click() {
-        bot2 = new ReinforcementBot();
+        bot2 = new ReinforcementBot(1);
     }
 
     public void onTree2Click() {

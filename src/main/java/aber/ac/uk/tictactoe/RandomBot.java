@@ -20,6 +20,6 @@ public class RandomBot extends Bot{
     }
 
     public void setGameState(int[] newState){
-        gameState = newState;
+        System.arraycopy(newState, 0, gameState, 0, 9);
     }
 }

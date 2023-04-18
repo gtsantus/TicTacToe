@@ -10,8 +10,12 @@ public class State {
     private boolean terminal;
     private final List<State> children;
 
+    private final int[] QValues;
+
+
     public State (int[] newState){
         gameState = new int[9];
+        QValues = new int [9];
         children = new ArrayList<>();
         System.arraycopy(newState, 0, gameState, 0, 9);
     }
@@ -19,11 +23,13 @@ public class State {
     public State() {
         gameState = new int[9];
         children = new ArrayList<>();
+        QValues = new int [9];
     }
 
     public State(State parent, int move){
         gameState = new int[9];
         children = new ArrayList<>();
+        QValues = new int [9];
         this.move = move;
         System.arraycopy(parent.getGameState(), 0, gameState, 0, 9);
         checkTerminal();
@@ -40,6 +46,11 @@ public class State {
     public void setValue(int value) {
         this.value = value;
     }
+
+    public void setGameState(int[] newState){
+        System.arraycopy(newState, 0, gameState, 0, 9);
+    }
+
     public int[] getGameState() {
         return gameState;
     }
@@ -51,6 +62,8 @@ public class State {
     public int getMove() {
         return move;
     }
+
+    public int[] getQValues() {return QValues;}
 
     public boolean isTerminal() {
         return terminal;
