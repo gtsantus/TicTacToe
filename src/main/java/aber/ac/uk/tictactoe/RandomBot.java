@@ -6,6 +6,10 @@ public class RandomBot extends Bot{
 
     private int[] gameState;
 
+    public RandomBot(){
+        gameState = new int[9];
+    }
+
     public int getNextMove(){
         Random rand = new Random();
         int move = rand.nextInt(0,9);

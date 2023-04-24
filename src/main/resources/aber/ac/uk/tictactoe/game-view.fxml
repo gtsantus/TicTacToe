@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
@@ -74,4 +75,6 @@
    <Button fx:id="btnStart" layoutX="316.0" layoutY="431.0" mnemonicParsing="false" onAction="#onStartButtonClick" prefHeight="38.0" prefWidth="68.0" text="Start" />
    <Button fx:id="btnNextMove" layoutX="175.0" layoutY="431.0" mnemonicParsing="false" onAction="#onNextMoveClick" prefHeight="38.0" prefWidth="84.0" text="Next Move" visible="false" />
    <Button fx:id="btnEndGame" layoutX="441.0" layoutY="431.0" mnemonicParsing="false" onAction="#onEndGameClick" prefHeight="38.0" prefWidth="84.0" text="Final State" visible="false" />
+   <Button fx:id="btnPlayGames" layoutX="568.0" layoutY="250.0" mnemonicParsing="false" onAction="#onPlayGamesClick" prefHeight="38.0" prefWidth="84.0" text="Play Games" visible="false" />
+   <TextField fx:id="txtNoOfGames" layoutX="536.0" layoutY="210.0" promptText="Enter Number of Games" visible="false" />
 </Pane>

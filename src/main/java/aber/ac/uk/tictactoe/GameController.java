@@ -1,15 +1,21 @@
 package aber.ac.uk.tictactoe;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 import java.util.Arrays;
 import java.util.Random;
 
 public class GameController {
+    public Button btnPlayGames;
+    public TextField txtNoOfGames;
+    private int numOfGames;
     TURN turn;
     private boolean gameStart = false;
     private boolean gameFinalState = false;
+    private boolean gamePlayMany = false;
     private int gameMode;
     private int[] masterGameState;
 
@@ -59,6 +65,7 @@ public class GameController {
         }
         gameStart = true;
         if(gameMode == 1){
+            bot1.load();
             if(turn == TURN.O){
                 bot1.setGameState(masterGameState);
                 int nextMove = bot1.getNextMove();
@@ -84,6 +91,9 @@ public class GameController {
                     }
                 }
             }
+        }else if(gameMode == 2){
+            bot1.load();
+            bot2.load();
         }
     }
 
@@ -93,6 +103,8 @@ public class GameController {
             gameFinalState = false;
             btnEndGame.setVisible(true);
             btnNextMove.setVisible(true);
+            btnPlayGames.setVisible(true);
+            txtNoOfGames.setVisible(true);
         }
         startGame();
     }
@@ -103,14 +115,33 @@ public class GameController {
                     lblNo2.getText().equals(lblNo5.getText()) && lblNo5.getText().equals(lblNo8.getText()) && !lblNo2.getText().equals("") || lblNo3.getText().equals(lblNo6.getText()) && lblNo6.getText().equals(lblNo9.getText()) && !lblNo3.getText().equals("") ||
                     lblNo1.getText().equals(lblNo5.getText()) && lblNo5.getText().equals(lblNo9.getText()) && !lblNo1.getText().equals("") || lblNo3.getText().equals(lblNo5.getText()) && lblNo5.getText().equals(lblNo7.getText()) && !lblNo3.getText().equals("")) {
                         lblTurn.setText(turn.toString() + " wins!");
-                        bot1.update();
+                        if(gameMode == 1){
+                            if(turn == TURN.O){
+                                bot1.update(2);
+                            }else{
+                                bot1.update(1);
+                            }
+                        } else if (gameMode == 2) {
+                            if(turn == TURN.O){
+                                bot1.update(2);
+                                bot2.update(2);
+                            }else{
+                                bot1.update(1);
+                                bot2.update(2);
+                            }
+                        }
                         gameStart = false;
                         btnStart.setVisible(true);
                         btnEndGame.setVisible(false);
                         btnNextMove.setVisible(false);
             }else if (masterGameState[0] != 0 && masterGameState[1] != 0 && masterGameState[2] != 0 && masterGameState[3] != 0 && masterGameState[4] != 0 && masterGameState[5] != 0 && masterGameState[6] != 0 && masterGameState[7] != 0 && masterGameState[8] != 0){
                 lblTurn.setText("Draw!");
-                bot1.update();
+                if(gameMode == 1){
+                    bot1.update(0);
+                } else if (gameMode == 2) {
+                    bot2.update(0);
+                }
+
                 gameStart = false;
                 btnStart.setVisible(true);
                 btnEndGame.setVisible(false);
@@ -345,5 +376,18 @@ public class GameController {
     public void onEndGameClick() {
         gameFinalState = true;
         onNextMoveClick();
+    }
+
+    public void onPlayGamesClick() {
+        numOfGames = Integer.parseInt(txtNoOfGames.getText());
+        gamePlayMany = true;
+        while(numOfGames > 0){
+            onStartButtonClick();
+            gameFinalState = true;
+            onNextMoveClick();
+            numOfGames--;
+            reset();
+        }
+        lblTurn.setText("Finished");
     }
 }

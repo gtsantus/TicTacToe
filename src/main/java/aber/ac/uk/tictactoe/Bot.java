@@ -15,7 +15,10 @@ public class Bot {
         System.arraycopy(newState, 0, gameState, 0, 9);
     }
 
-    public void update() {
+    public void update(int winner) {
+    }
+
+    public void load(){
 
     }
 }
