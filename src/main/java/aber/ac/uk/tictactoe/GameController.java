@@ -1,21 +1,16 @@
 package aber.ac.uk.tictactoe;
 
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
-import java.util.Arrays;
 import java.util.Random;
 
 public class GameController {
     public Button btnPlayGames;
     public TextField txtNoOfGames;
-    private int numOfGames;
     TURN turn;
     private boolean gameStart = false;
     private boolean gameFinalState = false;
-    private boolean gamePlayMany = false;
     private int gameMode;
     private int[] masterGameState;
 
@@ -127,7 +122,7 @@ public class GameController {
                                 bot2.update(2);
                             }else{
                                 bot1.update(1);
-                                bot2.update(2);
+                                bot2.update(1);
                             }
                         }
                         gameStart = false;
@@ -379,8 +374,7 @@ public class GameController {
     }
 
     public void onPlayGamesClick() {
-        numOfGames = Integer.parseInt(txtNoOfGames.getText());
-        gamePlayMany = true;
+        int numOfGames = Integer.parseInt(txtNoOfGames.getText());
         while(numOfGames > 0){
             onStartButtonClick();
             gameFinalState = true;

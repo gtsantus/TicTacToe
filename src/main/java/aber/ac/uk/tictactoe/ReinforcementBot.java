@@ -11,7 +11,7 @@ public class ReinforcementBot extends Bot{
     private final int player;
     private int[] gameState;
     private List<State> QTable;
-    private final List<State> actionHistory = new ArrayList<State>();
+    private final List<State> actionHistory = new ArrayList<>();
 
     public ReinforcementBot(int newPlayer){
         gameState = new int[9];
@@ -41,8 +41,8 @@ public class ReinforcementBot extends Bot{
             //make move based on the best one in the Q-Table
             for (State s:QTable) {
                 if(s.getGameState() == gameState){
+                    int QValue = 0;
                     for(int i = 0; i < 9; i++){
-                        int QValue = 0;
                         if(s.getQValues()[i] > QValue){
                             QValue = s.getQValues()[i];
                             move = i;
@@ -83,7 +83,7 @@ public class ReinforcementBot extends Bot{
 
     public void load(){
         //loads up what has been learnt from a text document with the format: State, Value for each Action
-        QTable = new ArrayList<State>();
+        QTable = new ArrayList<>();
         State temp = new State();
         try{
             File database = new File("test1.txt");
