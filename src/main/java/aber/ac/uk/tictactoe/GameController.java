@@ -169,6 +169,7 @@ public class GameController {
                             } else if (i == nextMove && nextMove == 8){
                                 onBox9Clicked();
                             }
+
                         }
                     }else if (gameMode == 2 && gameFinalState){
                         onNextMoveClick();
@@ -374,7 +375,13 @@ public class GameController {
     }
 
     public void onPlayGamesClick() {
-        int numOfGames = Integer.parseInt(txtNoOfGames.getText());
+        int numOfGames = 0;
+        try{
+            numOfGames = Integer.parseInt(txtNoOfGames.getText());
+        }catch(NumberFormatException e){
+            lblTurn.setText("error, please enter only numbers");
+        }
+        //long startTime = System.nanoTime();
         while(numOfGames > 0){
             onStartButtonClick();
             gameFinalState = true;
@@ -383,5 +390,8 @@ public class GameController {
             reset();
         }
         lblTurn.setText("Finished");
+        //long endTime = System.nanoTime();
+        //long duration = (endTime - startTime);
+        //lblTurn.setText(String.valueOf(duration));
     }
 }

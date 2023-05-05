@@ -19,6 +19,5 @@ public class Bot {
     }
 
     public void load(){
-
     }
 }

@@ -86,7 +86,7 @@ public class ReinforcementBot extends Bot{
         QTable = new ArrayList<>();
         State temp = new State();
         try{
-            File database = new File("test1.txt");
+            File database = new File("table1.txt");
             Scanner myReader = new Scanner(database);
             while (myReader.hasNextLine()){
                 String data = myReader.nextLine();
@@ -112,7 +112,7 @@ public class ReinforcementBot extends Bot{
             }
             myReader.close();
         }catch(FileNotFoundException e){
-            //cry
+            //error
         }
         if(QTable.isEmpty()){
             QTable.add(temp);
@@ -173,7 +173,7 @@ public class ReinforcementBot extends Bot{
         data.append(QTable.size());
         data.append("\n");
         try{
-            FileWriter writer = new FileWriter("test1.txt");
+            FileWriter writer = new FileWriter("table1.txt");
             writer.write(output.toString());
             writer.close();
             QTable.clear();
